@@ -7,12 +7,12 @@
             <v-col cols="8" xl="5">
               <div>
                 <h2
-                  class="display-1 white--text font-weight-medium"
+                    class="display-1 white--text font-weight-medium"
                 >MarkDown Project</h2>
                 <h6
-                  class="subtitle-1 mt-4 white--text op-5 font-weight-regular"
+                    class="subtitle-1 mt-4 white--text op-5 font-weight-regular"
                 >Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.</h6>
-<!--                <v-btn class="mt-4 text-capitalize" x-large outlined color="white">Learn More</v-btn>-->
+                <!--                <v-btn class="mt-4 text-capitalize" x-large outlined color="white">Learn More</v-btn>-->
               </div>
             </v-col>
           </v-row>
@@ -25,45 +25,17 @@
           <v-row>
             <v-col cols="12" lg="9" xl="6">
               <img src="@/assets/images/logo-icon.png" />
-              <h2 class="font-weight-bold mt-4 blue-grey--text text--darken-2">Entrar</h2>
+              <h2 class="font-weight-bold mt-4 blue-grey--text text--darken-2">Recuperar Contraseña</h2>
               <h6 class="subtitle-1">
-                ¿No tienes una cuenta?
-                <a href="/authentication/fullregister/" class>Registrate!</a>
+                ¿Ya tienes una cuenta registrada?
+                <a href="/authentication/fulllogin/" class>Ingresa!</a>
               </h6>
+              <br>
 
-              <v-form ref="form" v-model="valid" lazy-validation action="/dashboards/analytical">
-                <v-text-field
-                  v-model="email"
-                  :rules="emailRules"
-                  label="E-mail"
-                  class="mt-4"
-                  required
-                  outlined
-                ></v-text-field>
-                <v-text-field
-                  v-model="password"
-                  :counter="10"
-                  :rules="passwordRules"
-                  label="Password"
-                  required
-                  outlined
-                  :append-icon="show1 ? 'mdi-eye' : 'mdi-eye-off'"
-                  :type="show1 ? 'text' : 'password'"
-                  @click:append="() => (show1 = !show1)"
-                ></v-text-field>
+              <v-form ref="form" v-model="valid" lazy-validation action="/pages/boxedlogin">
 
-                <div class="d-block d-sm-flex align-center mb-4 mb-sm-0">
-<!--                  <v-checkbox-->
-<!--                    v-model="checkbox"-->
-<!--                    :rules="[v => !!v || 'You must agree to continue!']"-->
-<!--                    label="Remember me?"-->
-<!--                    required-->
-<!--                  ></v-checkbox>-->
-                  <div class="ml-auto">
-                    <a href="/authentication/fullrecovery/" class="link">¿Olvidaste tu password?</a>
-                  </div>
-                </div>
-                <br>
+                <v-text-field v-model="email" :rules="emailRules" label="E-mail" required outlined></v-text-field>
+
                 <v-btn
                   :disabled="!valid"
                   color="info"
@@ -71,7 +43,7 @@
                   class="mr-4"
                   submit
                   @click="submit"
-                >Entrar</v-btn>
+                >Recuperar contraseña</v-btn>
               </v-form>
               <div class="text-center mt-6">
                 <v-chip pill class="mr-2">
@@ -101,25 +73,17 @@
 export default {
   name: "FullLogin",
   data: () => ({
-    valid: true,
-    password: "",
-    show1: false,
-    passwordRules: [
-      v => !!v || "Password es necesario",
-      v => (v && v.length <= 10) || "Password no debe ser mayor a 10 caracteres"
-    ],
     email: "",
     emailRules: [
       v => !!v || "E-mail es necesario",
       v => /.+@.+\..+/.test(v) || "Ingrese un E-mail valido, por ejemplo: example@example.ex"
     ],
-    checkbox: false
   }),
   methods: {
     submit() {
       this.$refs.form.validate();
       if (this.$refs.form.validate(true)) {
-        this.$router.push({ path: "/dashboards/analytical" });
+        this.$router.push({ path: "/authentication/fulllogin" });
       }
     }
   }

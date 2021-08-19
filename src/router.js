@@ -23,7 +23,7 @@ const router = new Router({
   routes: [
     {
       path: "/",
-      redirect: "dashboards/analytical",
+      redirect: "authentication/fullLogin",
       component: () => import("@/layouts/full-layout/Layout"),
       children: [
         // Application
@@ -595,6 +595,11 @@ const router = new Router({
           name: "Error",
           path: "error",
           component: () => import("@/views/authentication/Error"),
+        },
+        {
+          name: "FullRecovery",
+          path: "fullrecovery",
+          component: () => import("@/views/authentication/FullRecovery")
         },
       ],
     },

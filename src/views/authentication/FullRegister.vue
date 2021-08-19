@@ -7,12 +7,12 @@
             <v-col cols="8" xl="5">
               <div>
                 <h2
-                  class="display-1 white--text font-weight-medium"
-                >Elegant Design with unlimited features, built with love</h2>
+                    class="display-1 white--text font-weight-medium"
+                >MarkDown Project</h2>
                 <h6
-                  class="subtitle-1 mt-4 white--text op-5 font-weight-regular"
-                >Wrappixel helps developers to build organized and well-coded admin dashboards full of beautiful and feature rich modules.</h6>
-                <v-btn class="mt-4 text-capitalize" x-large outlined color="white">Learn More</v-btn>
+                    class="subtitle-1 mt-4 white--text op-5 font-weight-regular"
+                >Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.</h6>
+                <!--                <v-btn class="mt-4 text-capitalize" x-large outlined color="white">Learn More</v-btn>-->
               </div>
             </v-col>
           </v-row>
@@ -25,17 +25,17 @@
           <v-row>
             <v-col cols="12" lg="9" xl="6">
               <img src="@/assets/images/logo-icon.png" />
-              <h2 class="font-weight-bold mt-4 blue-grey--text text--darken-2">Sign Up</h2>
+              <h2 class="font-weight-bold mt-4 blue-grey--text text--darken-2">Registrarse</h2>
               <h6 class="subtitle-1">
-                Don't have an account?
-                <a href="#/pages/fulllogin/" class>Sign in</a>
+                ¿Ya tienes una cuenta registrada?
+                <a href="/authentication/fulllogin/" class>Ingresa!</a>
               </h6>
 
-              <v-form ref="form" v-model="valid" lazy-validation action="/pages/boxedlogin">
+              <v-form ref="form" v-model="valid" lazy-validation action="dashboards/analytical">
                 <v-text-field
-                  v-model="fname"
-                  :rules="fnameRules"
-                  label="Full Name"
+                  v-model="user"
+                  :rules="userRules"
+                  label="Usuario"
                   class="mt-4"
                   required
                   outlined
@@ -50,16 +50,18 @@
                   outlined
                   :append-icon="show1 ? 'mdi-eye' : 'mdi-eye-off'"
                   :type="show1 ? 'text' : 'password'"
+                  @click:append="() => (show1 = !show1)"
                 ></v-text-field>
 
-                <div class="d-block d-sm-flex align-center mb-4 mb-sm-0">
+<!--                <div class="d-block d-sm-flex align-center mb-4 mb-sm-0">
                   <v-checkbox
                     v-model="checkbox"
                     :rules="[v => !!v || 'You must agree to continue!']"
                     label="I agree to the terms and privacy"
                     required
                   ></v-checkbox>
-                </div>
+                </div>-->
+                <br>
                 <v-btn
                   :disabled="!valid"
                   color="info"
@@ -67,7 +69,7 @@
                   class="mr-4"
                   submit
                   @click="submit"
-                >Sign In</v-btn>
+                >Registrarse</v-btn>
               </v-form>
               <div class="text-center mt-6">
                 <v-chip pill class="mr-2">
@@ -100,26 +102,25 @@ export default {
     password: "",
     show1: false,
     passwordRules: [
-      v => !!v || "Password is required",
-      v => (v && v.length <= 10) || "Password must be less than 10 characters"
+      v => !!v || "Password es necesario",
+      v => (v && v.length <= 10) || "Password no debe ser mayor a 10 caracteres"
     ],
     email: "",
     emailRules: [
-      v => !!v || "E-mail is required",
-      v => /.+@.+\..+/.test(v) || "E-mail must be valid"
+      v => !!v || "E-mail es necesario",
+      v => /.+@.+\..+/.test(v) || "Ingrese un E-mail valido, por ejemplo: example@example.ex"
     ],
     checkbox: false,
-    fname: "",
-    fnameRules: [
-      v => !!v || "Name is required",
-      v => (v && v.length <= 10) || "Name must be less than 10 characters"
+    user: "",
+    userRules: [
+      v => !!v || "Usuario es necesario",
     ]
   }),
   methods: {
     submit() {
       this.$refs.form.validate();
       if (this.$refs.form.validate(true)) {
-        this.$router.push({ path: "/pages/fulllogin" });
+        this.$router.push({ path: "/dashboards/analytical" });
       }
     }
   }
